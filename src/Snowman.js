@@ -63,16 +63,22 @@ function Snowman(props) {
             value={ltr}
             onClick={handleGuess}
             disabled={guessed.has(ltr)}
+            id={ltr}
         >
           {ltr}
         </button>
     ));
   }
 
+  const youLose = ((nWrong >= props.maxWrong) 
+  ? <p id="lost" >You lose! Correct answer is {answer}</p>
+  : <img src={(props.images)[nWrong]} alt={nWrong} />);
+
   /** render: render game */
   return (
       <div className="Snowman">
-        <img src={(props.images)[nWrong]} alt={nWrong} />
+        { youLose }
+        <p className="Number-wrong">Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
         <p>{generateButtons()}</p>
       </div>
